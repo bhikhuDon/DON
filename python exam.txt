@@ -1,0 +1,815 @@
+1--------------------------perfact number -------------------------------------------------------------------
+
+
+n = int(input("Please Enter The Number "))
+l1 =[]
+for i in range(1,n):
+   if n%i==0:
+       l1.append(i)
+if sum(l1)==n:
+    print("Number IS Perfect")
+    l2=[str(i) for i in l1]
+    print(n,"="," + ".join(l2)) 
+else:
+    print(n,"Number IS NOt Perfect")
+
+
+
+
+2---------------------------fibonaki string----------------------------------------------------------------------
+
+l1 = []
+no = int(input("enter the Number :- "))
+if no < 15:
+
+    for i in range(97 , no+97):
+        if len(l1) == 0:
+            l1.append(chr(i))
+        elif len(l1)== 1:
+            l1.append(chr(i))
+        else:
+            l1.append(l1 [len (l1) -1]+l1[len(l1) -2])
+
+    print(l1)
+else:
+    print("Number Is Valid in under 15")
+
+
+
+3-----------------------print recursive list---------------------------------------------------------------------
+
+
+list = [1,2,3,4,5,6,7]
+def printlist(n):
+    print(list[n],end = " ")
+    n+=1
+    if (n < len(list)):
+        printlist(n)
+printlist(0)
+
+4------------------------binary search-----------------------------------------------------
+
+def binary_search(arr, ele):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == ele:
+            return mid
+        elif arr[mid] < ele:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+arr = []
+for i in range(5):
+    b = int(input("Enter The Enteger "))
+    arr.append(b)
+    arr.sort()
+search = int(input("Enter The Serch Element"))    
+ele = search
+print(arr)
+result = binary_search(arr, ele)
+
+if result != -1:
+    print("Element found at index", result)
+else:
+    print("Element not found")
+
+
+
+5------------------acctedamy modules---------------------------------------------------------------
+
+
+modules -----
+
+
+courses = {}
+
+def add_course(name, credits, points):
+    courses[name] = (credits, points)
+
+
+def drop_course(name):
+    if name in courses:
+        del courses[name]
+
+
+def print_record():
+    for name, (credits, points) in courses.items():
+        print(f"{name}: {credits} credits, {points} points")
+
+
+def calculate_cgpa():
+    total_credits = sum(credits for credits, _ in courses.values())
+    total_points = sum(credits * points for credits, points in courses.values())
+    return total_points / total_credits if total_credits > 0 else 0.0
+
+
+
+
+-----main file
+
+
+
+import jayy  as j
+j.add_course("Math", 4, 9)
+j.add_course("Physics", 3, 8)
+j. add_course("Chemistry", 2, 7)
+
+
+print("Course Record:")
+j.print_record()
+
+ 
+cgpa = j.calculate_cgpa()
+print(f"CGPA: {cgpa:.2f}")
+
+j.drop_course("Physics")
+print("\nUpdated Course Record after dropping Physics:")
+j.print_record()
+
+
+cgpa = j.calculate_cgpa()
+print(f"Updated CGPA: {cgpa:.2f}")
+
+
+
+
+
+
+6-----------------------matrix operation----------------------------------------------------------
+
+----module
+
+
+
+def input_matrix(i, j):
+    matrix = []
+    for row in range(i):
+        matrix.append([])
+        for col in range(j):
+            matrix[row].append(int(input(f"Enter value for matrix[{row}][{col}]: ")))
+    return matrix
+
+def add_matrices(m1, m2):
+    rows = len(m1)
+    cols = len(m1[0])
+    sum_matrix = []
+    for row in range(rows):
+        sum_matrix.append([])
+        for col in range(cols):
+            sum_matrix[row].append(m1[row][col] + m2[row][col])
+    return sum_matrix
+
+def multiply_matrices(m1, m2):
+    rows = len(m1)
+    cols = len(m2[0])
+    result_matrix = []
+    for row in range(rows):
+        result_matrix.append([])
+        for col in range(cols):
+            sum = 0
+            for k in range(len(m2)):
+                sum += m1[row][k] * m2[k][col]
+            result_matrix[row].append(sum)
+    return result_matrix
+
+
+
+-----main----
+import matrix as mo
+
+
+i = int(input("Enter the number of rows: "))
+j = int(input("Enter the number of columns: "))
+
+
+print("Enter values for the first matrix:")
+matrix1 = mo.input_matrix(i, j)
+
+print("Enter values for the second matrix:")
+matrix2 = mo.input_matrix(i, j)
+
+
+added_matrix = mo.add_matrices(matrix1, matrix2)
+print("Sum of matrices:")
+for row in added_matrix:
+    print(row)
+
+
+if i == j:
+    multiplied_matrix = mo.multiply_matrices(matrix1, matrix2)
+    print("Multiplication of matrices:")
+    for row in multiplied_matrix:
+        print(row)
+else:
+    print("Matrix multiplication is not possible for non-square matrices.")
+
+
+
+7-------------------------tic tac toe game-------------------------------------------------------------------
+
+  def print_board(board):
+    """Display the board."""
+    print(f"""
+     {board[0]} | {board[1]} | {board[2]} 
+    ---+---+---
+     {board[3]} | {board[4]} | {board[5]} 
+    ---+---+---
+     {board[6]} | {board[7]} | {board[8]} 
+    """)
+
+def check_winner(board):
+    """Check if there's a winner."""
+    winning_combinations = [
+        (0, 1, 2), (3, 4, 5), (6, 7, 8),  
+        (0, 3, 6), (1, 4, 7), (2, 5, 8),  
+        (0, 4, 8), (2, 4, 6)             
+    ]
+    for combo in winning_combinations:
+        if board[combo[0]] == board[combo[1]] == board[combo[2]] != ' ':
+            return board[combo[0]]
+    return None
+
+def is_draw(board):
+    """Check if the game is a draw."""
+    return ' ' not in board
+
+def tic_tac_toe():
+    """Main game function."""
+    board = [' '] * 9
+    current_player = 'X'
+    print("Welcome to Tic-Tac-Toe!")
+    print_board(board)
+
+    while True:
+        try:
+            move = int(input(f"Player {current_player}, enter your move (0-8): "))
+            if 0 <= move < 9 and board[move] == ' ':
+                board[move] = current_player
+                print_board(board)
+
+                
+                winner = check_winner(board)
+                if winner:
+                    print(f"Player {winner} wins!")
+                    break
+                if is_draw(board):
+                    print("It's a draw!")
+                    break
+
+                
+                current_player = 'O' if current_player == 'X' else 'X'
+            else:
+                print("Invalid move! Try again.")
+        except ValueError:
+            print("Please enter a valid number (0-8).")
+
+if __name__ == "__main__":
+    tic_tac_toe()
+
+
+
+8-------------------------copy file and read write------------------------------------------------------------
+
+        
+with open('example.txt', 'w') as jm:
+    n= input("Input the String")
+    content = jm.write(n +"\t")
+  
+
+with open('example.txt', 'r') as jm:
+    result = jm.read()
+    print(result)
+with open("cpy.txt", 'w') as jm:
+    result = jm.write(result)
+
+with open('cpy.txt', 'r') as jm:
+    result = jm.read()
+    print(result)
+    
+
+
+
+9------------------------------------spilt word join word file--------------------------------------------------
+
+
+  with open('example.txt', 'r') as file:
+    text = file.read().split()
+
+
+
+    sentence = " + ".join(text)  
+
+
+with open('output.txt', 'w') as file:
+    file.write(sentence)
+
+
+with open('output.txt', 'r') as file:
+    result = file.read()
+    print("Content of 'output.txt':")
+    print(result)
+
+10 ---------------------replace word from file---------------------------------------
+
+
+
+   with open('example.txt', 'r') as file:
+    content = file.read()
+
+
+updated_content = content.replace('gujarat', 'gujrat')
+
+
+with open('example.txt', 'w') as file:
+    file.write(updated_content)
+
+
+with open('example.txt', 'r') as file:
+    result = file.read()
+    print("Updated content of 'example.txt':")
+    print(result)
+
+11------------------------cgpa record -----------------------------------------------------
+
+  def get_grade_point(grade):
+    """
+    Convert letter grade to grade points.
+    """
+    grade_points = {
+        'A': 10,
+        'B+': 9,
+        'B': 8,
+        'C+': 7,
+        'C': 6,
+        'D+': 5,
+        'D': 4,
+        'E': 0
+    }
+    return grade_points.get(grade.upper(), 0)  
+
+def compute_cgpa(input_file):
+    """
+    Read the academic records from the file and compute CGPA.
+    """
+    total_points = 0
+    total_credits = 0
+
+    try:
+        with open(input_file, 'r', encoding='utf-8') as infile:
+            
+            for line in infile:
+                
+                course_details = line.strip().split(',')
+                
+                if len(course_details) != 3:
+                    print(f"Skipping invalid line: {line.strip()}")
+                    continue
+                
+                course_name, credits, grade = course_details
+                try:
+                    credits = float(credits.strip())  
+                    grade = grade.strip()  
+                    grade_point = get_grade_point(grade)
+                    
+                    
+                    total_points += grade_point * credits
+                    total_credits += credits
+                except ValueError:
+                    print(f"Invalid data in line: {line.strip()} (credits should be numeric).")
+                    continue
+        
+        
+        if total_credits > 0:
+            cgpa = total_points / total_credits
+            print(f"CGPA: {cgpa:.2f}")
+        else:
+            print("No valid courses found to calculate CGPA.")
+    
+    except FileNotFoundError:
+        print(f"Error: The file {input_file} was not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+input_file = 'record.txt'  
+compute_cgpa(input_file)
+
+
+
+
+12-----------------------------------GitHub account-------------------------------------------------
+
+
+import os
+import json
+
+
+FILE_NAME = 'friends_data.txt'
+
+
+
+def readAll():
+    if os.path.exists(FILE_NAME):
+        with open(FILE_NAME, 'r') as f:
+            return json.load(f)
+    return []
+
+
+
+def saveAll(friends_list):
+    with open(FILE_NAME, 'w') as f:
+        json.dump(friends_list, f, indent=4)
+
+
+
+def add(name, phone, github):
+    friends = readAll()
+    new_friend = {'name': name, 'phone': phone, 'github': github}
+    friends.append(new_friend)
+    saveAll(friends)
+    print(f"Added friend: {name}")
+
+
+
+def remove(name=None, phone=None, github=None):
+    friends = readAll()
+    friends_to_remove = [f for f in friends if (f['name'] == name or f['phone'] == phone or f['github'] == github)]
+    if friends_to_remove:
+        friends = [f for f in friends if not (f['name'] == name or f['phone'] == phone or f['github'] == github)]
+        saveAll(friends)
+        print(f"Removed friend: {friends_to_remove[0]['name']}")
+    else:
+        print("Friend not found.")
+
+
+
+def updatePhone(name, phone):
+    friends = readAll()
+    friend_found = False
+    for friend in friends:
+        if friend['name'] == name:
+            friend['phone'] = phone
+            friend_found = True
+            break
+    if friend_found:
+        saveAll(friends)
+        print(f"Updated phone number for {name}.")
+    else:
+        print(f"Friend {name} not found.")
+
+
+def updateGithub(name, github):
+    friends = readAll()
+    friend_found = False
+    for friend in friends:
+        if friend['name'] == name:
+            friend['github'] = github
+            friend_found = True
+            break
+    if friend_found:
+        saveAll(friends)
+        print(f"Updated GitHub handle for {name}.")
+    else:
+        print(f"Friend {name} not found.")
+
+
+def printByName(name):
+    friends = readAll()
+    friend_found = False
+    for friend in friends:
+        if friend['name'] == name:
+            print(f"Friend: {friend['name']}, Phone: {friend['phone']}, GitHub: {friend['github']}")
+            friend_found = True
+            break
+    if not friend_found:
+        print(f"Friend {name} not found.")
+
+
+
+def printAll():
+    friends = readAll()
+    if friends:
+        for friend in friends:
+            print(f"Friend: {friend['name']}, Phone: {friend['phone']}, GitHub: {friend['github']}")
+    else:
+        print("No friends available.")
+
+
+
+if __name__ == '__main__':
+    
+    add('Yagnik', '6359438336', 'Captian Amrica')
+    add('Tushar', '916832540', 'Hulk')
+    printAll()
+    printByName('Yagnik')
+    updatePhone('Tushar', '9099155045')
+    updateGithub('Jay', 'John wick')
+    remove(name='Tushar')
+    printAll()
+
+
+13-------------------------conference register---------------------------------------------------------------
+
+import csv
+from collections import defaultdict
+
+
+def process_registration_data(file_path):
+   
+    with open(file_path, mode='r', newline='', encoding='utf-8') as file:
+      
+        reader = csv.DictReader(file)
+        
+        non_students_count = 0
+        iit_participants = []
+        duplicates = set()
+        unique_records = set()
+        affiliations = defaultdict(list)
+        
+        for row in reader:
+          
+            unique_id = (row['Name'], row['Email'])
+            
+            if unique_id in unique_records:
+             
+                duplicates.add((row['Name'], row['Email'], row['Affiliation']))
+            else:
+                unique_records.add(unique_id)
+            
+          
+            if row['Role'].lower() != 'student':
+                non_students_count += 1
+            
+          
+            if 'IIT' in row['Affiliation']:
+                iit_participants.append((row['Name'], row['Affiliation']))
+            
+       
+            affiliations[row['Affiliation']].append((row['Name'], row['Email']))
+
+        return non_students_count, iit_participants, duplicates, affiliations
+
+
+def display_results(file_path):
+    non_students_count, iit_participants, duplicates, affiliations = process_registration_data(file_path)
+
+  
+    print(f"Number of non-students registered: {non_students_count}")
+    
+   
+    print("\nParticipants from IITs:")
+    for participant in iit_participants:
+        print(f"Name: {participant[0]}, Affiliation: {participant[1]}")
+    
+ 
+    print("\nDuplicate records:")
+    if duplicates:
+        for record in duplicates:
+            print(f"Name: {record[0]}, Email: {record[1]}, Affiliation: {record[2]}")
+    else:
+        print("No duplicate records found.")
+    
+   
+    print("\nParticipants grouped by affiliation:")
+    for affiliation, participants in affiliations.items():
+        print(f"\nAffiliation: {affiliation}")
+        for participant in participants:
+            print(f"Name: {participant[0]}, Email: {participant[1]}")
+
+
+file_path = 'document.csv'  
+display_results(file_path)
+
+
+
+
+14------------------------------------------mobile pattern---------------------------------------------------
+
+import re 
+str = ''' 
+  9537220866
+  95372 20866
+  9537 220 866
+  (+91)9537220866
+  95 37 22 08 66 
+  9537-220-866'''
+pattern = r'\d{10}'
+pattern1 = r'\d{5}\D\d{5}'
+pattern2 = r'\d{4}\D\d{3}\D\d{3}'
+pattern3 = r'\S\+\d{2}\D\d{10}'
+pattern4 = r'\d{2}\D\d{2}\D\d{2}\D\d{2}\D+\d{2}'
+pattern5 = pattern+'|'+pattern1+'|'+pattern2+'|'+pattern3+'|'+pattern4
+search = re.findall(pattern5 , str)
+print(search)
+
+
+15--------------------------------------------email pattern------------------------------------------------------------
+
+import re 
+str = ''' 
+ vaghamashijoy@gmail.com
+ vaghamashijoy2004@gmail.com
+ vaghamashi.joy@gmail.com
+ vaghamashijay.cs@gujaratvidyapith.org
+ v.jay123@gmail.com
+'''
+pattern = r'\w+\@\w+\.\w+'
+pattern1 = r'\w+\.\w+\@\w+\.\w+'
+pattern2 = r'\w+\.\w+\@\w+\.\w+'
+all = pattern+'|'+pattern1+'|'+pattern2
+search = re.findall(all,str)
+print(search)
+
+16 ---------------------------person class age calculate---------------------------------------------------------
+
+from datetime import datetime
+
+class Person:
+    def __init__(self, name, country, date_of_birth):
+        
+        self.name = name
+        self.country = country
+        self.date_of_birth = datetime.strptime(date_of_birth, '%Y-%m-%d')  
+    
+    def calculate_age(self):
+        today = datetime.today()
+        
+        age = today.year - self.date_of_birth.year
+        
+        if today.month < self.date_of_birth.month or (today.month == self.date_of_birth.month and today.day < self.date_of_birth.day):
+            age -= 1
+        
+        return age
+    
+    def __str__(self):
+        return f"Name: {self.name}, Country: {self.country}, Date of Birth: {self.date_of_birth.strftime('%Y-%m-%d')}, Age: {self.calculate_age()}"
+
+
+person = Person("Roman Reigns", "USA", "1970-05-15")
+print(person)
+
+
+person2 = Person("UnderTacker", "UK", "1972-12-25")
+print(person2)
+
+
+
+17------------------------------class person and employee child class inheritance --------------------------------
+
+  class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+    def details(self):
+        print("Details from Person class")
+
+class Employee(Person):
+    def __init__(self, name, age, employee_id):
+        super().__init__(name, age)
+        self.employee_id = employee_id
+
+    def details(self):
+        print(f"Employee ID: {self.employee_id}, Name: {self.name}, Age: {self.age}")
+
+person = Person("Jay", 30)
+person.display()
+person.details()
+
+employee = Employee("Tushar", 25, "E123")
+employee.display()
+employee.details()
+
+ 
+
+20-----------------------------------vehicles---------------------------------------------------------------------
+
+
+
+
+   class Vehicle:
+    def speed(self):
+    
+        return "speed of the vehicle is unknown."
+
+class Car(Vehicle):
+    def speed(self):
+      
+        return " car speed is 120 km/h."
+
+class Bike(Vehicle):
+    def speed(self):
+     
+        return " bike speed is 80 km/h."
+
+class Train(Vehicle):
+    def speed(self):
+     
+        return " train speed is 200 km/h."
+
+def show_speed(vehicle):
+ 
+    print(vehicle.speed())
+
+
+
+car = Car()
+bike = Bike()
+train = Train()
+
+
+print("Showing speed for different vehicles:")
+show_speed(car)  
+show_speed(bike)  
+show_speed(train)  
+
+
+21----------------------------------------------bank credit and withdrw--------------------------------------------
+
+      class BankAccount:
+    def __init__(self, account_number, balance=0):
+      
+        self.__account_number = account_number
+        self.__balance = balance
+    
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited: {amount} units")
+        else:
+            print("Deposit amount must be positive.")
+    
+ 
+    def withdraw(self, amount):
+        if amount > 0:
+            if self.__balance >= amount:
+                self.__balance -= amount
+                print(f"Withdrew: {amount} units")
+            else:
+                print("Insufficient balance.")
+        else:
+            print("Withdraw amount must be positive.")
+    
+  
+    def get_balance(self):
+        return self.__balance
+    
+  
+    def get_account_number(self):
+        return self.__account_number
+
+
+account = BankAccount("123456789", 500)
+
+
+print("Initial balance:", account.get_balance())  
+
+account.deposit(200)  
+print("Updated balance after deposit:", account.get_balance()) 
+
+account.withdraw(100)  
+print("Updated balance after withdrawal:", account.get_balance())  
+
+account.withdraw(700) 
+
+
+print("Account Number:", account.get_account_number())
+
+
+22------------------------------------------------shape class--------------------------------------------------------
+
+
+
+class Shape:
+    def __init__(self):
+    
+        pass
+    
+    def area(self):
+      
+        return 0
+
+class Square(Shape):
+    def __init__(self, length):
+     
+        self.length = length
+    
+    def area(self):
+       
+        return self.length ** 2
+
+
+shape = Shape()
+print("Area of shape:", shape.area()) 
+
+
+square = Square(5)
+print("Area of square:", square.area()) 
