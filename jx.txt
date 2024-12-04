@@ -1,0 +1,1130 @@
+1---------------------------------five Integer------------------------------------------------------------------
+
+import java.util.*;
+
+public class p1 {
+    public static void main(String[] args) {
+        if (args.length != 5) {
+            System.out.println("please enter only 5 integers");
+            return;
+        }
+        
+        try {
+            int[] arr1 = new int[5];
+            for (int i = 0; i < 5; i++) {
+                arr1[i] = Integer.parseInt(args[i]);
+            }
+            
+            Arrays.sort(arr1);
+            System.out.println("Sorted array --> " + Arrays.toString(arr1));
+
+            int min = arr1[0];
+            int max = arr1[arr1.length - 1];
+            System.out.println("Minimum value --> " + min);
+            System.out.println("Maximum value --> " + max);
+        } catch (Exception t) {
+            System.out.println("error: " + t.getMessage());
+        }
+    }
+}
+
+
+2-------------------------------------five String------------------------------------------------------------------------------
+
+import java.util.Arrays;
+
+public class p2 {
+    public static void main(String[] args) {
+        if (args.length != 5) 
+        {
+            System.out.println("please enter only 5 names!");
+            return;
+        }
+
+        try {
+            String[] names = new String[5];
+            for (int i = 0; i < 5; i++) 
+            {
+                names[i] = args[i];
+            }
+            Arrays.sort(names);
+            System.out.println("Sorted names: " + String.join(" ", names));
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+3---------------------------------class Utility----------------------------------------------------------------------
+
+import java.util.Scanner;
+
+public class p3 {
+
+    public static long factorial(int number) {
+        long result = 1;
+        for (int i = 2; i <= number; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    public static boolean isPrime(int number) {
+        if (number <= 1) return false;
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static boolean isEven(int number) {
+        return number % 2 == 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a positive number: ");
+        int num = scanner.nextInt();
+
+        if (num < 0) {
+            System.out.println("Please enter a non-negative number.");
+        } else {
+            System.out.println("Factorial of " + num + ": " + factorial(num));
+            System.out.println(num + "is prime->" + isPrime(num));
+            System.out.println(num + "is even->" + isEven(num));
+            System.out.println(num + "is odd->" + !isEven(num));
+        }
+    }
+}
+
+4---------------------------class number--------------------------------------------------
+
+import java.util.Scanner;
+
+public class p4 {
+    private double value;
+
+    public p4(double value) {
+        this.value = value;
+    }
+
+    public boolean isZero() {
+        return value == 0;
+    }
+
+    public boolean isPositive() {
+        return value > 0;
+    }
+
+    public boolean isNegative() {
+        return value < 0;
+    }
+
+    public boolean isOdd() {
+        if (value % 1 != 0) {
+            return false; 
+        }
+        return (int) value % 2 != 0;
+    }
+
+    public boolean isEven() {
+        if (value % 1 != 0) {
+            return false;
+        }
+        return (int) value % 2 == 0;
+    }
+
+    public long factorial() {
+        if (value < 0 || value % 1 != 0) {
+            throw new IllegalArgumentException("please enter positive numbers");
+        }
+        long result = 1;
+        for (int i = 1; i <= (int) value; i++) {
+            result *= i;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        double num = scanner.nextDouble();
+
+        p4 number = new p4(num);
+
+        System.out.println("Is Zero: " + number.isZero());
+        System.out.println("Is Positive: " + number.isPositive());
+        System.out.println("Is Negative: " + number.isNegative());
+        System.out.println("Is Odd: " + number.isOdd());
+        System.out.println("Is Even: " + number.isEven());
+
+        try {
+            System.out.println("Factorial: " + number.factorial());
+        } catch (Exception e) {
+            System.out.println("Factorial: " + e.getMessage());
+        }
+    }
+}
+
+5-------------------------------Matrix------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+class Matrix {
+    int[][] arr1;
+    int[][] arr2;
+    int temp;
+    Scanner scanner = new Scanner(System.in);
+
+    void arrsize() {
+        System.out.println("Enter array size:");
+        temp = scanner.nextInt();
+        arr1 = new int[temp][temp];
+        arr2 = new int[temp][temp];
+    }
+
+    void getInput1() {
+        System.out.println("Enter elements for Matrix 1:");
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr1.length; j++) {
+                System.out.print("arr1[" + i + "][" + j + "]: ");
+                arr1[i][j] = scanner.nextInt();
+            }
+        }
+    }
+
+    void getInput2() {
+        System.out.println("Enter elements for Matrix 2:");
+        for (int i = 0; i < arr2.length; i++) {
+            for (int j = 0; j < arr2.length; j++) {
+                System.out.print("arr2[" + i + "][" + j + "]: ");
+                arr2[i][j] = scanner.nextInt();
+            }
+        }
+    }
+
+    void addition() {
+        System.out.println("Addition:");
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr1.length; j++) {
+                System.out.print((arr1[i][j] + arr2[i][j]) + "  ");
+            }
+            System.out.println();
+        }
+    }
+
+    void subtraction() {
+        System.out.println("Subtraction:");
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr1.length; j++) {
+                System.out.print((arr1[i][j] - arr2[i][j]) + "  ");
+            }
+            System.out.println();
+        }
+    }
+
+    void multiplication() {
+        int[][] mul = new int[arr1.length][arr1.length];
+        System.out.println("Multiplication:");
+        for (int i = 0; i < arr1.length; i++) {
+            for (int j = 0; j < arr1.length; j++) {
+                for (int k = 0; k < arr1.length; k++) {
+                    mul[i][j] += arr1[i][k] * arr2[k][j];
+                }
+            }
+        }
+        for (int i = 0; i < mul.length; i++) {
+            for (int j = 0; j < mul.length; j++) {
+                System.out.print(mul[i][j] + "  ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class p5 {
+    public static void main(String[] args) {
+        Matrix obj = new Matrix();
+        Scanner scanner = new Scanner(System.in);
+        obj.arrsize();
+        obj.getInput1();
+        obj.getInput2();
+        while (true) {
+            System.out.println("Enter Choice (1: Addition, 2: Subtraction, 3: Multiplication, 4: Exiting)");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    obj.addition();
+                    break;
+                case 2:
+                    obj.subtraction();
+                    break;
+                case 3:
+                    obj.multiplication();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Enter a valid choice!");
+            }
+        }
+    }
+}
+
+6-------------------------------------class circle------------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+public class p6 {
+    private double x;
+    private double y; 
+    private double r; 
+
+    public p6(double x, double y, double r) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+    }
+
+    public double area() {
+        return Math.PI * r * r;
+    }
+
+    public double circumference() {
+        return 2 * Math.PI * r;
+    }
+
+    public double diameter() {
+        return 2 * r;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the x: ");
+        double x = scanner.nextDouble();
+
+        System.out.print("Enter the y: ");
+        double y = scanner.nextDouble();
+
+        System.out.print("Enter the radius of the circle: ");
+        double r = scanner.nextDouble();
+
+        if (r <= 0) {
+            System.out.println("Radius must be positive!");
+            return;
+        }
+
+        p6 circle = new p6(x, y, r);
+
+        System.out.printf("\nCircle with center (%.2f, %.2f) and radius %.2f:%n", x, y, r);
+        System.out.printf("Area: %.2f%n", circle.area());
+        System.out.printf("Circumference: %.2f%n", circle.circumference());
+        System.out.printf("Diameter: %.2f%n", circle.diameter());
+    }
+}
+
+7---------------------------------------------stack---------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+class Stack {
+    int[] stack;
+    int top = -1;
+    int x;
+
+    Stack(int size) {
+        stack = new int[size];
+        x = size;
+    }
+
+    public void push(int ele) {
+        if (top == x - 1) {
+            System.out.println("Stack Overflow!");
+        } else {
+            stack[++top] = ele;
+            System.out.println(ele + " pushed onto the stack.");
+        }
+    }
+
+    public void pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow!");
+        } else {
+            int deletedElement = stack[top--];
+            System.out.println("Element " + deletedElement + " popped from the stack.");
+        }
+    }
+
+    public void traverse() {
+        if (top == -1) {
+            System.out.println("Stack is empty!");
+        } else {
+            System.out.println("Stack elements:");
+            for (int i = 0; i <= top; i++) {
+                System.out.print(stack[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class p7 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter stack size: ");
+        int size = sc.nextInt();
+
+        Stack obj = new Stack(size);
+
+        while (true) {
+            System.out.println("\nMenu:");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Traverse");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter element to push: ");
+                    int ele = sc.nextInt();
+                    obj.push(ele);
+                    break;
+                case 2:
+                    obj.pop();
+                    break;
+                case 3:
+                    obj.traverse();
+                    break;
+                case 4:
+                    System.out.println("Exiting...");
+                    return;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        }
+    }
+}
+
+8---------------------------------------Matrix2--------------------------------------------------------------------------------------
+import java.util.Scanner;
+
+class Matrix {
+    private double[][] data;
+    private int rows, cols;
+
+    public Matrix(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        this.data = new double[rows][cols];
+    }
+
+    public void setMatrix(Scanner scanner) {
+        System.out.println("Enter elements for a " + rows + "x" + cols + " matrix:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                data[i][j] = scanner.nextDouble();
+            }
+        }
+    }
+
+    public Matrix transpose() {
+        Matrix result = new Matrix(cols, rows);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.data[j][i] = data[i][j];
+            }
+        }
+        return result;
+    }
+
+    public Matrix add(Matrix m) {
+        Matrix result = new Matrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.data[i][j] = this.data[i][j] + m.data[i][j];
+            }
+        }
+        return result;
+    }
+
+    public Matrix subtract(Matrix m) {
+        Matrix result = new Matrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.data[i][j] = this.data[i][j] - m.data[i][j];
+            }
+        }
+        return result;
+    }
+
+    public Matrix multiply(Matrix m) {
+        Matrix result = new Matrix(rows, m.cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < m.cols; j++) {
+                for (int k = 0; k < cols; k++) {
+                    result.data[i][j] += this.data[i][k] * m.data[k][j];
+                }
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (double[] row : data) {
+            for (double value : row) {
+                sb.append(value).append("\t");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+}
+
+public class p8 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+       
+        System.out.println("Enter the number of rows and columns for both matrices:");
+        int rows = scanner.nextInt();
+        int cols = scanner.nextInt();
+
+   
+        Matrix m1 = new Matrix(rows, cols);
+        Matrix m2 = new Matrix(rows, cols);
+
+      
+        System.out.println("Enter elements for Matrix 1:");
+        m1.setMatrix(scanner);
+
+        System.out.println("Enter elements for Matrix 2:");
+        m2.setMatrix(scanner);
+
+       
+        System.out.println("\nMatrix 1:");
+        System.out.println(m1);
+
+        System.out.println("Matrix 2:");
+        System.out.println(m2);
+
+       
+        System.out.println("Transpose of Matrix 1:");
+        System.out.println(m1.transpose());
+
+     
+        System.out.println("Addition of Matrix 1 and Matrix 2:");
+        System.out.println(m1.add(m2));
+
+
+        System.out.println("Subtraction of Matrix 1 and Matrix 2:");
+        System.out.println(m1.subtract(m2));
+
+
+        System.out.println("Multiplication of Matrix 1 and Matrix 2:");
+        System.out.println(m1.multiply(m2));
+
+        scanner.close();
+    }
+}
+
+9------------------------------------------------abstract class---------------------------------------------------------------------
+
+abstract class Shape {
+    abstract double area();
+    abstract double perimeter();
+}
+
+class Triangle extends Shape {
+    double a, b, c, l, h;
+
+    Triangle(double a, double b, double c, double l, double h) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.l = l;
+        this.h = h; 
+    }
+
+    public double area() {
+        return (this.l * this.h) / 2;
+    }
+
+    public double perimeter() {
+        return this.a + this.b + this.c;
+    }
+}
+
+class Rectangle extends Shape {
+    double r, y;
+
+    Rectangle(double width, double height) {
+        this.r = width;
+        this.y = height;
+    }
+
+    public double area() {
+        return r * y;
+    }
+
+    public double perimeter() {
+        return 2 * (r + y);
+    } 
+}
+
+class Circle extends Shape {
+    double r;
+
+    Circle(double radius) {
+        this.r = radius;
+    }
+
+    public double area() {
+        return Math.PI * r * r;
+    }
+
+    public double perimeter() {
+        return 2 * Math.PI * r;
+    }
+}
+
+public class p9{
+    public static void main(String args[]) {
+        Rectangle rectangle = new Rectangle(5, 10);
+        Triangle triangle = new Triangle(6, 8, 4, 7, 3);
+        Circle circle = new Circle(7);
+
+        System.out.println("Rectangle:");
+        System.out.println("Area: " + rectangle.area());
+        System.out.println("Perimeter: " + rectangle.perimeter());
+
+        System.out.println("\nTriangle:");
+        System.out.println("Area: " + triangle.area());
+        System.out.println("Perimeter: " + triangle.perimeter());
+
+        System.out.println("\nCircle:");
+        System.out.println("Area: " + circle.area());
+        System.out.println("Perimeter: " + circle.perimeter());
+    }
+}
+
+10---------------------------------------------------interface--------------------------------------------------------------------------------
+
+interface Shape {
+    double area();
+    double perimeter();
+}
+
+class Triangle implements Shape {
+    double a, b, c, l, h;
+
+    Triangle(double a, double b, double c, double l, double h) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.l = l;
+        this.h = h;
+    }
+
+    public double area() {
+        return (l * h) / 2;
+    }
+
+    public double perimeter() {
+        return a + b + c;
+    }
+}
+
+class Rectangle implements Shape {
+    double r, y;
+
+    Rectangle(double width, double height) {
+        r = width;
+        y = height;
+    }
+
+    public double area() {
+        return r * y;
+    }
+
+    public double perimeter() {
+        return 2 * (r + y);
+    }
+}
+
+class Circle implements Shape {
+    double r;
+
+    Circle(double a) {
+        r = a;
+    }
+
+    public double area() {
+        return 3.14 * r * r;
+    }
+
+    public double perimeter() {
+        return 2 * 3.14 * r;
+    }
+}
+
+public class p10 {
+    public static void main(String args[]) {
+        Rectangle rectangle = new Rectangle(5, 10);
+        Triangle triangle = new Triangle(6, 4, 5, 7, 3);
+        Circle circle = new Circle(7);
+
+        System.out.println("Rectangle:");
+        System.out.println("Area: " + rectangle.area());
+        System.out.println("Perimeter: " + rectangle.perimeter());
+
+        System.out.println("\nTriangle:");
+        System.out.println("Area: " + triangle.area());
+        System.out.println("Perimeter: " + triangle.perimeter());
+
+        System.out.println("\nCircle:");
+        System.out.println("Area: " + circle.area());
+        System.out.println("Perimeter: " + circle.perimeter());
+    }
+}
+
+11---------------------------------------------custom Exception----------------------------------------------------
+
+class CustomException extends Exception {
+    public CustomException(String message) {
+        super(message);
+    }
+}
+
+public class p11 {
+    public static void main(String[] args) {
+        try {
+            for (String arg : args) {
+                int number = Integer.parseInt(arg);
+                if (number < 0) {
+                    throw new CustomException("Number is Negative...!");
+                }
+                System.out.println("Number is positive: " + number);
+            }
+        } catch (CustomException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
+
+12----------------------------------------------------stackException----------------------------------------------------------------------------
+
+import java.util.*;
+class StackException extends Exception {
+    public StackException(String message) {
+        super(message);
+    }
+}
+
+class Stack {
+    int stack[];
+    int top = -1;
+
+    Stack(int x) {
+        stack = new int[x];
+    }
+
+    public int push() {
+        try {
+            if (top == stack.length - 1) {
+                throw new StackException("Stack Overflow!");
+            }
+            top++;
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter Number:");
+            int temp = sc.nextInt();
+            stack[top] = temp;
+        } catch (StackException e) {
+            System.out.println(e.getMessage());
+        }
+        return top;
+    }
+
+    public void pop() {
+        try {
+            if (top == -1) {
+                throw new StackException("Stack Underflow!");
+            } else {
+                top--;
+            }
+        } catch (StackException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void display() {
+        try {
+            if (top == -1) {
+                throw new StackException("Stack is Empty!");
+            } else {
+                System.out.println("Stack:");
+                for (int i = 0; i <= top; i++) {
+                    System.out.println(stack[i]);
+                }
+            }
+        } catch (StackException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+public class p12 {
+    public static void main(String args[]) {
+        Stack obj = new Stack(5);
+
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter 1 for Push:");
+            System.out.println("Enter 2 for Pop:");
+            System.out.println("Enter 3 for Display:");
+            System.out.println("Enter Choice:");
+            int temp = sc.nextInt();
+
+            switch (temp) {
+                case 1:
+                    obj.push();
+                    break;
+                case 2:
+                    obj.pop();
+                    break;
+                case 3:
+                    obj.display();
+                    break;
+                default:
+                    System.out.println("Please Enter a Valid Choice.");
+            }
+        }
+    }
+}
+
+13------------------------------------------------Thread-------------------------------------------------------------------------------------
+class OddThread extends Thread {
+    public void run() {
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 != 0) {
+                System.out.println("Odd: " + i);
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+class PrimeThread implements Runnable {
+    public void run() {
+        for (int j = 2; j <= 100; j++) {
+            if (isPrime(j)) {
+                System.out.println("Prime: " + j);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+public class p13 {
+    public static void main(String[] args) {
+        Thread oddThread = new OddThread();
+        Thread primeThread = new Thread(new PrimeThread());
+        oddThread.start();
+        primeThread.start();
+    }
+}
+
+14-------------------------------------filecopy---------------------------------------------------------------------
+
+import java.io.*;
+
+public class p14 {
+    public static void main(String[] args) {
+        if (args.length < 3) {
+            System.out.println("Usage: java FileCopy <source-file> <destination-file> <mode: binary/text>");
+            return;
+        }
+
+        String sourceFile = args[0];
+        String destinationFile = args[1];
+        String mode = args[2];
+
+        try {
+            if (mode.equalsIgnoreCase("text")) {
+                copyTextFile(sourceFile, destinationFile);
+            } else if (mode.equalsIgnoreCase("binary")) {
+                copyBinaryFile(sourceFile, destinationFile);
+            } else {
+                System.out.println("Invalid mode. Please specify 'binary' or 'text'.");
+            }
+        } catch (IOException e) {
+            System.out.println("Error during file copying: " + e.getMessage());
+        }
+    }
+
+    private static void copyTextFile(String source, String destination) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(source));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(destination))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+        System.out.println("Text file copied successfully.");
+    }
+
+    private static void copyBinaryFile(String source, String destination) throws IOException {
+        try (FileInputStream inputStream = new FileInputStream(source);
+             FileOutputStream outputStream = new FileOutputStream(destination)) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        }
+        System.out.println("Binary file copied successfully.");
+    }
+}
+
+15-----------------------------------student----------------------------------------------------------
+
+import java.io.*;
+
+public class p15 {
+    public static void main(String[] args) throws IOException {
+        FileReader stu = new FileReader("studentfile.txt");
+        try (BufferedReader br = new BufferedReader(stu)) {
+            String data = br.readLine();
+            System.out.println("Roll NO | Name   | Sub1 | Sub2 | Sub3 | Sub4 | Percentage");
+            System.out.println("-----------------------------------------------------------");
+
+            while (data != null) {
+                String arr[] = data.split("\t");
+
+                if (arr.length == 6) {
+                    int sub1 = Integer.parseInt(arr[2]);
+                    int sub2 = Integer.parseInt(arr[3]);
+                    int sub3 = Integer.parseInt(arr[4]);
+                    int sub4 = Integer.parseInt(arr[5]);
+                    int total = sub1 + sub2 + sub3 + sub4;
+                    float percentage = total / 4.0f;
+
+                    System.out.printf("%-8s| %-7s| %-5d| %-5d| %-5d| %-5d| %.2f%%\n",
+                            arr[0], arr[1], sub1, sub2, sub3, sub4, percentage);
+                } else {
+                    System.out.println("Error: Invalid data format. Expected 6 fields, found " + arr.length);
+                }
+
+                data = br.readLine();
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+16-------------------------------------package-----------------------------------------------------------------------
+Queue.java
+package org.gvp.dcs.ds;
+
+public class Queue {
+    private int[] queue;
+    private int front, rear, size;
+
+    public Queue(int size) {
+        this.size = size;
+        queue = new int[size];
+        front = -1;
+        rear = -1;
+    }
+
+    public void enqueue(int value) {
+        if (rear == size - 1) {
+            System.out.println("Queue Overflow");
+        } else {
+            if (front == -1) front = 0;
+            queue[++rear] = value;
+        }
+    }
+
+    public int dequeue() {
+        if (front == -1 || front > rear) {
+            System.out.println("Queue Underflow");
+            return -1;
+        } else {
+            return queue[front++];
+        }
+    }
+
+    public void display() {
+        if (front == -1 || front > rear) {
+            System.out.println("Queue is empty");
+        } else {
+            System.out.print("Queue: ");
+            for (int i = front; i <= rear; i++) {
+                System.out.print(queue[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+Stack.java
+package org.gvp.dcs.ds;
+
+public class Stack {
+    private int[] stack;
+    private int top;
+    private int size;
+
+    public Stack(int size) {
+    this.size = size;
+    stack = new int[size];
+    top = -1;
+}
+
+    public void push(int value) {
+        if (top == size - 1) {
+            System.out.println("Stack Overflow");
+        } else {
+            stack[++top] = value;
+        }
+    }
+
+    public int pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow");
+            return -1;
+        } else {
+            return stack[top--];
+        }
+    }
+
+    public void display() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+        } else {
+            System.out.print("Stack: ");
+            for (int i = 0; i <= top; i++) {
+                System.out.print(stack[i] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+cube.java
+package org.gvp.dcs.shapes;
+
+public class Cube {
+    private double side;
+
+    public Cube(double side) {
+        this.side = side;
+    }
+
+    public double calculateVolume() {
+        return Math.pow(side, 3);
+    }
+
+    public double calculateSurfaceArea() {
+        return 6 * Math.pow(side, 2);
+    }
+
+    public void display() {
+        System.out.println("Cube with side: " + side);
+        System.out.println("Volume: " + calculateVolume());
+        System.out.println("Surface Area: " + calculateSurfaceArea());
+    }
+}
+
+sphere.java
+package org.gvp.dcs.shapes;
+
+public class Sphere {
+    private double radius;
+
+    public Sphere(double radius) {
+        this.radius = radius;
+    }
+
+    public double calculateVolume() {
+        return (4.0 / 3) * Math.PI * Math.pow(radius, 3);
+    }
+
+    public double calculateSurfaceArea() {
+        return 4 * Math.PI * Math.pow(radius, 2);
+    }
+
+    public void display() {
+        System.out.println("Sphere with radius: " + radius);
+        System.out.println("Volume: " + calculateVolume());
+        System.out.println("Surface Area: " + calculateSurfaceArea());
+    }
+}
+
+main.java
+import org.gvp.dcs.ds.Stack;
+import org.gvp.dcs.ds.Queue;
+import org.gvp.dcs.shapes.Sphere;
+import org.gvp.dcs.shapes.Cube;
+
+public class p16 {
+    public static void main(String[] args) {
+       
+        System.out.println("=== Stack Demo ===");
+        Stack stack = new Stack(5);
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        stack.display();
+        System.out.println("Popped: " + stack.pop());
+        stack.display();
+
+       
+        System.out.println("\n=== Queue Demo ===");
+        Queue queue = new Queue(5);
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+        queue.display();
+        System.out.println("Dequeued: " + queue.dequeue());
+        queue.display();
+
+     
+        System.out.println("\n=== Sphere Demo ===");
+        Sphere sphere = new Sphere(5);
+        sphere.display();
+
+     
+        System.out.println("\n=== Cube Demo ===");
+        Cube cube = new Cube(3);
+        cube.display();
+    }
+}
